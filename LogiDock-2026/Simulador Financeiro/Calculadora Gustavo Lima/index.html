@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira - LogiDock</title>
+</head>
+<body>
+    <div>
+        <label for="ipt_horas">Insira a quantidade de horas que você gasta na carga e descarga: </label>
+        <input type="number" id="ipt_horas" placeholder="Preencha o campos em Horas">
+    </div>
+    <div>
+        <label for="ipt_capacidade_max">Insira a capacidade máxima, em toneladas, que o caminhão carrega: </label>
+        <input type="number" id="ipt_capacidade_max" placeholder="Preencha o campos em Toneladas">
+    </div>
+    <div>
+        <label for="ipt_qtd_garagem">Insira a quantidade de garagens que você possui na doca: </label>
+        <input type="number" id="ipt_qtd_garagem" placeholder="Preencha o campo com a quantidade de garagem">
+    </div>
+
+    <button onclick="simular()">
+        Simular
+    </button>
+
+    <h4 id="id_resultado"></h4>
+</body>
+
+<script>
+    // pesquisas apontam que, um caminhão pode perder entre 2 a 4 horas em carga e descargas
+    // https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/Lei/L11442.htm
+    // https://tabelasdefrete.com.br/blog/calculo-e-cobranca-de-estadia-J2/8#:~:text=Table_title:%20C%C3%A1lculo%20e%20Cobran%C3%A7a%20de%20Estadia%20Table_content:,nhoras%20x%2038%20x%20R$%202%2C29**%20%7C
+    function simular() {
+        let horas = Number(ipt_horas.value);
+        let capacidadeMax = Number(ipt_capacidade_max.value);
+        let qtdGaragem = Number(ipt_qtd_garagem.value);
+        let calculoLogiDock; 
+
+        if (horas < 0){
+            id_resultado.innerHTML = `A quantidade de horas não pode ser negativa!`;
+        } else if (horas >= 24){
+            id_resultado.innerHTML = `Um dia só tem 24 horas!!!`;
+        }
+        
+        if (horas > 3){
+            calculoLogiDock = (horas - 3) * capacidadeMax * 2.29 * qtdGaragem
+        } else if (horas <= 3){
+            calculoLogiDock = capacidadeMax * 2.29 * qtdGaragem
+        }
+
+        if (capacidadeMax < 0){
+            id_resultado.innerHTML = `A capacidade máxima do caminhão não pode ser negativa!`;
+        }
+
+        if (qtdGaragem < 0) {
+            id_resultado.innerHTML = `A quantidade de garagem não pode ser negativa!`;
+        }
+
+        let calculoPerca = horas * capacidadeMax * 2.29 * qtdGaragem
+
+        if (horas >= 5){
+            id_resultado.innerHTML = `Você está ultrapassando a quantidade de horas limites permitido pela legislação! <br>
+                                    Você poderá pagar uma multa de <span style = "color: #F00;">R$ 550,00 a R$ 10.500,00 </span>, a serem aplicadas pela ANTT, sem prejuízo do cancelamento da inscrição no RNTR-C, quando for o caso. <br>
+                                    Mais <span style = "color: #F00;">R$${calculoPerca.toFixed(2)} </span> 
+                                    <br>
+                                    Pelo caminhão estar parado, por registros manuais`
+        }else if (horas == 5){
+            id_resultado.innerHTML = `Você está ultrapassando a quantidade de horas limites permitido pela legislação! <br>
+                                    Você poderá pagar uma multa de <span style = "color: #F00;">R$ 550,00 a R$ 10.500,00 </span>, a serem aplicadas pela ANTT, sem prejuízo do cancelamento da inscrição no RNTR-C, quando for o caso.`
+        }else if (horas < 5){
+            id_resultado.innerHTML = `Em cada carga e descarga, você está perdendo <span style = "color: #F00;">R$${calculoPerca.toFixed(2)} </span>
+                                    <br>
+                                    Pelo caminhão estar parado, por registros manuais`
+        }
+        id_resultado.innerHTML += `<br>
+        Mas, caso utilize o serviço de Sistema de Monitoramento Inteligente de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar <span style= "color: #0E0;">R$${(calculoPerca - calculoLogiDock).toFixed(2)} </span> + multas!!! `
+        
+    };
+
+</script>
+
+</html>
