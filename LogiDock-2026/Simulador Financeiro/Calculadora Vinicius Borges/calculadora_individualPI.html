@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1><u>Calculadora financeira - Consulte com LogiDock $🚚</u></h1>
+    <br>
+    <span>Insira a quantidade média de toneladas de seus caminhões transporte:</span>
+    <input type="number" id="toneladas_insert">
+    <br>
+    <span>Insira a quantidade média de caminhões transporte que entram e saem das docas:</span>
+    <input type="number" id="caminhoes_insert">
+    <br><br>
+    <h2>Consulte a baixo o prejizo dependendo do tempo de atraso em horas.</h2>
+    <button onclick="botao3hrs()"> 3 horas</button><button onclick="botao5hrs()"> 5 horas</button>
+    <button onclick="botao7hrs()"> 7 horas</button>
+
+    <div id="div1"></div>
+</body>
+<script>
+
+    function botao3hrs() {
+        let toneladas = Number(toneladas_insert.value)
+        let caminhoes = Number(caminhoes_insert.value)
+        let horas = Number(0.00)
+        let valor = Number(0.00)
+
+        horas = 3
+        valor = 30 * ((caminhoes * 0.10) * (toneladas * 2.29 * horas))
+        div1.innerHTML = `Os valores informados apontam que considerando atrasos de 
+        ${horas} horas, o prejuízo em um mês considerando atrasos de 10% dos caminhões inseridos
+        seria um total de R$${valor}.`
+    }
+    function botao5hrs() {
+        let toneladas = Number(toneladas_insert.value)
+        let caminhoes = Number(caminhoes_insert.value)
+        let horas = Number(0.00)
+        let valor = Number(0.00)
+
+        horas = 5
+        valor = 30 * ((caminhoes * 0.10) * (toneladas * 2.29 * horas))
+        div1.innerHTML =`Os valores informados apontam que considerando atrasos de 
+        ${horas} horas, o prejuízo em um mês considerando atrasos de 10% dos caminhões inseridos
+        seria um total de R$${valor}.`
+    }
+    function botao7hrs() {
+        let toneladas = Number(toneladas_insert.value)
+        let caminhoes = Number(caminhoes_insert.value)
+        let horas = Number(0.00)
+        let valor = Number(0.00)
+
+        horas = 7
+        valor = 30 * ((caminhoes * 0.10) * (toneladas * 2.29 * horas))
+        div1.innerHTML = `Os valores informados apontam que considerando atrasos de 
+        ${horas} horas, o prejuízo em um mês considerando atrasos de 10% dos caminhões inseridos
+        seria um total de R$${valor}.`
+    }
+
+
+
+
+
+
+</script>
+
+</html>
