@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Insira o tempo em horas por dia da descarga e carga do caminhão <input type="text" id="id_tempo"><br><br>
+    insira capacidade máxima de Toneladas do caminhão <input type="text" id="id_peso"><br><br>
+    insira quantidade de docas/caminhões <input type="text" id="id_qtd_docas"><br><br>
+    <button onclick="calcular()">Simular lucro</button>
+    <div id="div_msg"></div>
+</body>
+<script>
+    function calcular() {
+        let tempo = Number(id_tempo.value);
+        let peso = Number(id_peso.value);
+        let qtd_docas = Number(id_qtd_docas.value);
+        let calculo_logi;
+
+        if (tempo < 0 || tempo > 24) {
+            div_msg.innerHTML = `erro`;
+            alert(`Insira um valor de horas válido!, entre 0 e 24 horas!`)
+        }
+        if (peso < 0 ) {
+            div_msg.innerHTML = `erro`;
+            alert(`Um caminhao nao pode ter carga negativa!`)
+        }
+        if (qtd_docas < 0 ) {
+            div_msg.innerHTML = `erro`;
+            alert(`Nao pode haver docas negativas!`)
+        }
+        if (tempo > 3) {
+            calculo_logi = (tempo - 3) * peso * 2.29 * qtd_docas;
+        }else if(tempo <= 3){
+            calculo_logi = peso * 2.29 * qtd_docas;
+        }
+        let calculoPerda = tempo * peso * 2.29 * qtd_docas
+        if(tempo < 5){
+            div_msg.innerHTML = `Em cada carga e descarga, você está perdendo <span style = "color: #F00;">R$${calculoPerda.toFixed(2)} </span>
+                                    <br>
+                                    Pelo caminhão estar parado, por registros manuais`
+        }else if(tempo == 5){
+            div_msg.innerHTML = `Você está QUASE ultrapassando a quantidade de horas limites permitido pela legislação! <br>
+                                    Você poderá pagar uma multa de <span style = "color: #F00;">R$ 550,00 a R$ 10.500,00 </span>, a serem aplicadas pela ANTT, sem prejuízo do cancelamento da inscrição no RNTR-C, quando for o caso.`
+        }else if(tempo > 5){
+            div_msg.innerHTML = `Você está ultrapassando a quantidade de horas limites permitido pela legislação! <br>
+                                    Você poderá pagar uma multa de <span style = "color: #F00;">R$ 550,00 a R$ 10.500,00 </span>, a serem aplicadas pela ANTT, sem prejuízo do cancelamento da inscrição no RNTR-C, quando for o caso. <br>
+                                    Mais <span style = "color: #F00;">R$${calculoPerda.toFixed(2)} </span> 
+                                    <br>
+                                    Pelo caminhão estar parado, por registros manuais`
+        }
+        div_msg.innerHTML += `<br>
+        Mas, caso utilize o serviço de Sistema de Monitoramento Inteligente de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar <span style= "color: #0E0;">R$${(calculoPerda - calculo_logi).toFixed(2)} </span> + multas!!! `
+        
+    }
+</script>
+
+</html>
