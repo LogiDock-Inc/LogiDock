@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<body>
+    
+    <h1><u>Calculadora financeira - Consulte com LogiDock $⛟</u></h1>
+
+    <div>
+        <label for="ipt_media_toneladas">Insira a quantidade média de toneladas dos caminhões de transportes: </label>
+        <input type="number" id="ipt_media_toneladas">
+    </div>
+
+   <div>
+        <label for="ipt_media_caminhoes">Insira a quantidade média de caminhões que entra na doca: </label>
+        <input type="number" id="ipt_media_caminhoes">
+   </div>
+
+    <h2>Consulte a baixo o prejuizo dependendo do tempo de atraso em horas.</h2>
+
+    <button onclick="calcularPrejuizo3Horas()">3 Horas</button>
+    <button onclick="calcularPrejuizo5Horas()">5 Horas</button>
+    <button onclick="calcularPrejuizo7Horas()">7 Horas</button>
+    <button onclick="valorEspecifico()">Valor Especifico</button>
+
+   <div id="id_valor_especifico"></div>
+   <div id="botao_calcular"></div>
+
+   <h4 id="h4_resultado"></h4>
+
+</body>
+
+<script>
+    let horas;
+    
+    let mediaToneladas;
+    let mediaCaminhoes;
+    
+    let calculoPercaDez;
+    let calculoPercaCem;
+    let calculoEconomicaoCem;
+    let calculoEconomicaoDez;
+
+    function calcularPrejuizo3Horas() {
+        mediaToneladas = Number(ipt_media_toneladas.value);
+        mediaCaminhoes = Number(ipt_media_caminhoes.value);
+
+        horas = 3;
+
+        calculoPercaDez = 30 *(horas * mediaToneladas * 2.29 * (mediaCaminhoes * 0.10));
+        calculoPercaCem = 30 * (horas * mediaToneladas * 2.29 * mediaCaminhoes);
+        calculoEconomicaoCem = 30 * (mediaToneladas * 2.29 * mediaCaminhoes);
+        calculoEconomicaoDez = 30 * (mediaToneladas * 2.29 * (mediaCaminhoes * 0.10));
+
+        h4_resultado.innerHTML = `Os valores informados apontam que considerando atrasos de 
+        ${horas} horas, o prejuízo em um mês considerando atrasos de 10% dos caminhões inseridos
+        seria um total de <span style= "color: #F00;">R$${(calculoPercaDez.toFixed(2))} </span>.
+        <br>
+        No pior cénario possivel, em que todos os caminhões engarrafem nas docas, o prejuízo total pode alcançar <span style= "color: #F00;">R$${(calculoPercaCem.toFixed(2))} </span>.
+        <br> <br>
+        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span>, e no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento <br> de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
+
+        id_valor_especifico.innerHTML = ``;
+        botao_calcular.innerHTML = ``;
+    };
+
+    function calcularPrejuizo5Horas() {
+        mediaToneladas = Number(ipt_media_toneladas.value);
+        mediaCaminhoes = Number(ipt_media_caminhoes.value);
+
+        horas = 5;
+
+        calculoPercaDez = 30 *(horas * mediaToneladas * 2.29 * (mediaCaminhoes * 0.10));
+        calculoPercaCem = 30 * (horas * mediaToneladas * 2.29 * mediaCaminhoes);
+        calculoEconomicaoCem = 30 * ((horas - 3) * mediaToneladas * 2.29 * mediaCaminhoes);
+        calculoEconomicaoDez = 30 * ((horas - 3) * mediaToneladas * 2.29 * (mediaCaminhoes * 0.10));
+
+        h4_resultado.innerHTML = `Os valores informados apontam que considerando atrasos de 
+        ${horas} horas, o prejuízo em um mês considerando atrasos de 10% dos caminhões inseridos
+        seria um total de <span style= "color: #F00;">R$${(calculoPercaDez.toFixed(2))} </span>.
+        <br>
+        No pior cénario possivel, em que todos os caminhões engarrafem nas docas, o prejuízo total pode alcançar <span style= "color: #F00;">R$${(calculoPercaCem.toFixed(2))} </span>.
+        <br> <br>
+        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span>, e no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento <br> de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
+
+        id_valor_especifico.innerHTML = ``;
+        botao_calcular.innerHTML = ``;
+    };
+
+    function calcularPrejuizo7Horas() {
+        mediaToneladas = Number(ipt_media_toneladas.value);
+        mediaCaminhoes = Number(ipt_media_caminhoes.value);
+
+        horas = 7;
+
+        
+        calculoPercaDez = 30 *(horas * mediaToneladas * 2.29 * (mediaCaminhoes * 0.10));
+        calculoPercaCem = 30 * (horas * mediaToneladas * 2.29 * mediaCaminhoes);
+        calculoEconomicaoCem = 30 * ((horas - 3) * mediaToneladas * 2.29 * mediaCaminhoes);
+        calculoEconomicaoDez = 30 * ((horas - 3) * mediaToneladas * 2.29 * (mediaCaminhoes * 0.10));
+        
+        h4_resultado.innerHTML = `Os valores informados apontam que considerando atrasos de 
+        ${horas} horas, o prejuízo em um mês considerando atrasos de 10% dos caminhões inseridos
+        seria um total de <span style= "color: #F00;">R$${(calculoPercaDez.toFixed(2))} </span>.
+        <br>
+        No pior cénario possivel, em que todos os caminhões engarrafem nas docas, o prejuízo total pode alcançar <span style= "color: #F00;">R$${(calculoPercaCem.toFixed(2))} </span>.
+        <br> <br>
+        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span>, e no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento <br> de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
+
+        id_valor_especifico.innerHTML = ``;
+        botao_calcular.innerHTML = ``;
+    };
+
+    function valorEspecifico() {
+        id_valor_especifico.innerHTML = `<br> <label for="ipt_valor_especifico">Insira um valor de horas especifico: </label>`
+        id_valor_especifico.innerHTML += `<input type="number" id="ipt_valor_especifico">`
+
+        botao_calcular.innerHTML = `<button onclick="calcularPrejuizoEspecifico()">Calcular</button>`
+    };
+
+    function calcularPrejuizoEspecifico() {
+        mediaToneladas = Number(ipt_media_toneladas.value);
+        mediaCaminhoes = Number(ipt_media_caminhoes.value);
+
+        let valorEspecifico = Number(ipt_valor_especifico.value);
+
+        if (valorEspecifico <= 3){
+            calculoEconomicaoCem = 30 * (mediaToneladas * 2.29 * mediaCaminhoes);
+            calculoEconomicaoDez = 30 * (mediaToneladas * 2.29 * (mediaCaminhoes * 0.10));
+        } else {    
+            calculoEconomicaoCem = 30 * ((valorEspecifico - 3) * mediaToneladas * 2.29 * mediaCaminhoes);
+            calculoEconomicaoDez = 30 * ((valorEspecifico - 3) * mediaToneladas * 2.29 * (mediaCaminhoes * 0.10));
+        }
+
+        calculoPercaDez = 30 * (valorEspecifico * mediaToneladas * 2.29 * (mediaCaminhoes * 0.10));
+        calculoPercaCem = 30 * (valorEspecifico * mediaToneladas * 2.29 * mediaCaminhoes);
+
+        h4_resultado.innerHTML = `Os valores informados apontam que considerando atrasos de 
+        ${horas} horas, o prejuízo em um mês considerando atrasos de 10% dos caminhões inseridos
+        seria um total de <span style= "color: #F00;">R$${(calculoPercaDez.toFixed(2))} </span>.
+        <br>
+        No pior cénario possivel, em que todos os caminhões engarrafem nas docas, o prejuízo total pode alcançar <span style= "color: #F00;">R$${(calculoPercaCem.toFixed(2))} </span>.
+        <br> <br>
+        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span>, e no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento <br> de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
+    };
+
+</script>
+
+</html>
