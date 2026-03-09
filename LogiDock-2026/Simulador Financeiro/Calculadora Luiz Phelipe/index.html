@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Quantar horas o caminhão ficou parado -->
+    <label for="ipt_horas">
+        <b>Quantas horas um caminhão ficou parado na doca:</b>
+    </label>
+    <br>
+    <input type="number" id="ipt_horas" placeholder="horas paradas" min="0" max="24"
+    style="width: 200px;">
+
+    <br><br>
+
+    <!-- Quantas toneladas o caminhão carregava -->
+    <label for="ipt_carga">
+        <b>Quantas toneladas o caminhão carrega:</b>
+    </label>
+    <br>
+    <input type="number" id="ipt_carga" placeholder="Peso da carga em tonelada" min="1" max="16000"
+    style="width: 200px;">
+    
+    <br><br>
+
+    <!-- Botão para simular a perca -->
+    <button onclick="simularPerca()">
+        Simular 
+    </button>
+
+    <br><br>
+
+    <!-- Resultado -->
+    <h3 id="id_resultado">
+        Sem a nossa solução você está perdendo: 
+    </h3>
+</body>
+
+<script>
+    function simularPerca() {
+        let horas = Number(ipt_horas.value);
+        let peso = Number(ipt_carga.value);
+        let perca = 0;
+
+        if (horas >= 5) {
+            // (horas - 5) --> Por hora excedente
+            perca += (peso * 2.41) * (horas - 5); // R$2,41 por tonelada
+            perca += 3800 * (horas - 5); // R$3.800 por hora sem funcionamento
+
+            id_resultado.innerHTML = `
+                Sem a nossa solução você está perdendo:
+                <span style="color: #FF0000;">
+                    R$${perca}
+                </span>
+                por dia
+            `;
+        }
+    }
+</script>
+</html>
