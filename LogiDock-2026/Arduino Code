@@ -1,19 +1,26 @@
+// Definição de variáveis 
 const int PINO_SENSOR_TEMPERATURA = A2;
 float temperaturaCelsius;
 
+// Execução ao ligar o arduino com a máquina (Ocorre apenas uma vez)
 void setup() {
   Serial.begin(9600);
 } 
 
+//Série de comandos que são executados em loop, várias vezes (Ocorre constantemente)
 void loop() {
 
+// Chamamento da variável para o funcionamento
   int valorLeitura = analogRead(PINO_SENSOR_TEMPERATURA);
 
+//Conversão da temperatura captada em sinais elétricos para a interpretação 
   temperaturaCelsius = (valorLeitura * 5.0 / 1023.0) / 0.01;
 
-  Serial.println("Temperatura: ");
+// Série de apresentação dos dados
+  Serial.println("Temperatura: "); 
   Serial.print(temperaturaCelsius);
   Serial.println(" C");
 
+// Intervalo entre os prints (2 segundos)
   delay(2000);
 }
