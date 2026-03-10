@@ -12,7 +12,7 @@
     <div>
         <label for="ipt_media_toneladas">Insira a quantidade média de toneladas dos caminhões de transportes: </label>
         <input type="number" id="ipt_media_toneladas">
-    </div>
+    </div><br>
 
    <div>
         <label for="ipt_media_caminhoes">Insira a quantidade média de caminhões que entra na doca <b>por mês</b>: </label>
@@ -29,7 +29,7 @@
    <div id="id_valor_especifico"></div>
    <div id="botao_calcular"></div>
 
-   <h4 id="h4_resultado"></h4>
+   <h3 id="h4_resultado"></h3>
 
 </body>
 
@@ -61,8 +61,8 @@
         <br>
         No pior cénario possivel, em que todos os caminhões engarrafem nas docas, o prejuízo total pode alcançar <span style= "color: #F00;">R$${(calculoPercaCem.toFixed(2))} </span>.
         <br> <br>
-        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span> <br>
-        Agora, no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
+        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #008000;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span> <br> <br>
+        Agora, no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #008000;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
 
         id_valor_especifico.innerHTML = ``;
         botao_calcular.innerHTML = ``;
@@ -85,8 +85,8 @@
         <br>
         No pior cénario possivel, em que todos os caminhões engarrafem nas docas, o prejuízo total pode alcançar <span style= "color: #F00;">R$${(calculoPercaCem.toFixed(2))} </span>.
         <br> <br>
-        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span> <br>
-        Agora, no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
+        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #008000;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span> <br> <br>
+        Agora, no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #008000;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
 
         id_valor_especifico.innerHTML = ``;
         botao_calcular.innerHTML = ``;
@@ -110,14 +110,15 @@
         <br>
         No pior cénario possivel, em que todos os caminhões engarrafem nas docas, o prejuízo total pode alcançar <span style= "color: #F00;">R$${(calculoPercaCem.toFixed(2))} </span>.
         <br> <br>
-        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span> <br>
-        Agora, no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
+        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #008000;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span> <br> <br>
+        Agora, no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #008000;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
 
         id_valor_especifico.innerHTML = ``;
         botao_calcular.innerHTML = ``;
     };
 
     function valorEspecifico() {
+        h4_resultado.innerHTML = ``;
         id_valor_especifico.innerHTML = `<br> <label for="ipt_valor_especifico">Insira um valor de horas especifico: </label>`
         id_valor_especifico.innerHTML += `<input type="number" id="ipt_valor_especifico">`
 
@@ -147,8 +148,8 @@
         <br>
         No pior cénario possivel, em que todos os caminhões engarrafem nas docas, o prejuízo total pode alcançar <span style= "color: #F00;">R$${(calculoPercaCem.toFixed(2))} </span>.
         <br> <br>
-        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span> <br>
-        Agora, no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #0E0;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
+        Mas, caso utilize o serviço de Sistema de Monitoramento de Docas com Sensores Infravermelhos, da LogiDock, você vai economizar, considerando o cenário mais ameno (os 10% apresentado anteriormente) <span style= "color: #008000;">R$${((calculoPercaDez - calculoEconomicaoDez).toFixed(2))} </span> <br> <br>
+        Agora, no cenário mais extremo (os 100% apresentado anteriormente) <span style= "color: #008000;">R$${((calculoPercaCem - calculoEconomicaoCem).toFixed(2))} </span> com o monitoralmento de dados, e ter certeza que multas e atrasos não serão mais problemas.`;
     };
 
 </script>
