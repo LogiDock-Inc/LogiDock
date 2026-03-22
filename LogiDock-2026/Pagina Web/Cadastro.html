@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiDock - Cadastro</title>
+</head>
+<body>
+
+    <div class="cabecalho">
+        <img src="logo.png" alt="Logo" id="id_logo">
+    </div>
+
+    <h1 id="titulo">CADASTRO</h1>
+
+    <div class="container">
+
+
+        <div class="container_input" id="input_usuario">
+            <img src="icone_usuario.png" alt="">
+            <input type="text" id="ipt_usuario" placeholder="USUÁRIO">
+        </div>
+
+        <div class="container_input" id="input_email">
+            <img src="icone_email.png" alt="">
+            <input type="text" id="ipt_email" placeholder="EMAIL">
+        </div>
+
+        <div class="container_input" id="input_senha">
+            <img src="icone_senha.png" alt="">
+            <input type="text" id="ipt_senha" placeholder="SENHA">
+            <img id="icone_olho_senha" src="icone_olho_senha.png" alt="">
+        </div>
+
+        <div class="container_input" id="input_cnpj">
+            <img src="icone_cnpj.png" alt="">
+            <input type="text" id="ipt_cnpj" placeholder="CNPJ">
+        </div>
+
+        <button onclick="cadastrar()">CADASTRAR</button>
+
+        <div class="rodape">
+            <div id="ir_login">JÁ POSSUI CONTA? FAÇA O LOGIN</div>
+            <div class="erro">
+                <img src="" alt="" id="icone_erro">
+                <div id="msg_erro"></div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+<script>
+
+function cadastrar() {
+    const usuario = ipt_usuario.value.trim();
+    const email   = ipt_email.value.trim();
+    const senha   = ipt_senha.value;
+    const cnpj    = ipt_cnpj.value.trim();
+
+    // O ! antes da variável significa "se estiver vazio"
+    if (!usuario || !email || !senha || !cnpj) {
+        msg_erro.innerHTML = `Preencha todos os campos`
+        icone_erro.src = 'icone_erro.png'
+
+    } else if(!email.includes("@")) {
+        msg_erro.innerHTML = `Email inválido`
+        icone_erro.src = 'icone_erro.png'
+
+    } else if(cnpj.length !== 14){
+        msg_erro.innerHTML = `CNPJ inválido`
+        icone_erro.src = 'icone_erro.png'
+    
+    } else {
+
+        /* localStorage
+        O localStorage é como um caderno que o navegador guarda no computador.
+        Ele mantém as informações mesmo depois de fechar a aba ou o navegador.
+        O Cadastro.html ESCREVE nesse caderno e o Login.html LÊ esse caderno.
+        Ambos usam o mesmo nome 'usuarios', por isso conseguem se comunicar.
+        
+        JSON
+        O problema é que o localStorage só consegue guardar TEXTO.
+        Ele não consegue guardar uma lista diretamente.
+        O JSON funciona como um tradutor entre lista e texto:
+        
+        JSON.stringify → transforma a lista em texto para SALVAR
+        JSON.parse     → transforma o texto de volta em lista para LER
+        
+        localStorage.getItem('usuarios') tenta buscar o que foi salvo.
+        Se ninguém cadastrou ainda, ele retorna null (nada).
+        O || '[]' garante que, se estiver vazio, começa com uma lista vazia.
+        */
+
+        const listadeUsuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+
+ 
+        // Essas duas variáveis começam como false (não existe nenhum igual).
+        // O for vai mudar para true se encontrar algum repetido.
+        let usuarioJaExiste = false;
+        let emailJaExiste   = false;
+
+        for (let i = 0; i < listadeUsuarios.length; i++) {
+
+            // Compara o usuário digitado com o usuário cadastrado na posição i
+            if (listadeUsuarios[i].usuario === usuario) { usuarioJaExiste = true; }
+
+            // Compara o email digitado com o email cadastrado na posição i
+            if (listadeUsuarios[i].email   === email)   { emailJaExiste   = true; }
+        }
+
+        if (usuarioJaExiste) {
+            msg_erro.innerHTML = `Esse usuário já está cadastrado.`
+            icone_erro.src = 'icone_erro.png'
+
+        } else if (emailJaExiste) {
+            msg_erro.innerHTML = `Esse email já está cadastrado.`
+            icone_erro.src = 'icone_erro.png'
+
+        } else {
+
+            // .push() adiciona o novo usuário no final da lista
+            listadeUsuarios.push({ usuario, email, senha, cnpj });
+
+            // JSON.stringify transforma a lista em texto para poder salvar
+            // localStorage.setItem escreve no caderno com o nome 'usuarios'
+            localStorage.setItem('usuarios', JSON.stringify(listadeUsuarios));
+
+            alert('Cadastro realizado com sucesso!');
+            window.location.href = 'Login.html';
+        }
+    }
+}
+
+</script>
+
+<style>
+
+    /* Variáveis de cor
+   :root é o elemento raiz da página (o <html>).
+   Definir variáveis aqui permite reutilizá-las em todo o CSS com var(--nome).
+   Se precisar mudar uma cor, muda só aqui e aplica em todo o site.
+*/
+:root{
+    --branco: #ffffff;
+    --branco_opaco: rgba(255, 255, 255, 0.8);
+    --azul_claro: #3b82f6;
+    --vermelho: #d30202;
+}
+
+/* Body
+   display: flex + flex-direction: column → empilha os elementos verticalmente
+   align-items: center                   → centraliza tudo horizontalmente
+   min-height: 100vh                     → garante que ocupa a tela toda,
+                                           mesmo que o conteúdo seja pequeno
+   background-size: cover                → a imagem cobre toda a tela sem
+                                           deixar espaços em branco
+   background-position: center           → centraliza a imagem no fundo
+*/
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url(background.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    min-height: 100vh;
+}
+
+/* Cabeçalho
+   width: 100% faz o cabeçalho ocupar a largura toda da tela,
+   assim a logo fica naturalmente alinhada à esquerda                        
+*/
+.cabecalho{
+   width: 100%;
+}
+
+/* Logo
+   width fixo + height: auto → a altura se ajusta proporcionalmente,
+   evitando que a imagem fique distorcida
+*/
+#id_logo{
+    height: auto;
+    width: 300px;
+}
+
+/* Título
+   Como o body tem align-items: center, o h1 já nasce centralizado.
+   letter-spacing aumenta o espaço entre as letras
+*/
+#titulo{
+    color: var(--branco_opaco);
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.1rem;
+}
+
+/* Container do formulário
+   display: flex + flex-direction: column → campos empilhados verticalmente
+   gap: 30px   → espaço entre cada campo, sem precisar de margin manual
+   width: 90% + max-width: 500px → responsivo:
+     em telas grandes: no máximo 500px
+     em telas pequenas: 90% da largura disponível
+*/
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 90%;
+    max-width: 500px;
+}
+
+/*Cada campo (ícone + input)
+   display: flex + align-items: center → ícone e input ficam lado a lado
+                                         e alinhados verticalmente no centro
+   gap: 20px   → espaço entre o ícone e o input
+   padding     → espaço interno (respiro dentro da borda)
+*/
+.container_input{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border: 1.5px solid var(--branco);
+    border-radius: 5px;
+    padding: 15px 15px;
+}
+
+/* Input
+   flex: 1       → o input cresce e ocupa todo o espaço disponível,
+                   empurrando o ícone para as bordas automaticamente
+   border: none  → remove a borda padrão do navegador
+   outline: none → remove o contorno azul que aparece ao clicar
+   background: transparent → sem fundo, fica transparente sobre o container
+*/
+.container_input input{
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: var(--branco);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
+
+.container_input input::placeholder{
+    color: var(--branco);
+}
+
+#icone_olho_senha{
+    cursor: pointer; /* muda o cursor para mãozinha ao passar em cima */
+}
+
+/* Botão
+   width: 100% → ocupa toda a largura do container
+   padding     → aumenta a área clicável e a altura do botão
+*/
+button{
+    width: 100%;
+    padding: 14px;
+    background: var(--branco);
+    color: var(--azul_claro);
+    border: none;
+    border-radius: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+/* Rodapé
+   flex-direction: column + align-items: center → textos centralizados
+   e empilhados um embaixo do outro
+*/
+.rodape{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#ir_login{
+    color: var(--branco);
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0.03em;
+}
+
+/* Div de erro
+   display: flex → ícone e texto de erro ficam lado a lado
+   text-transform: uppercase → texto sempre em maiúsculo
+*/
+.erro{
+    display: flex;
+    gap: 6px;
+    text-transform: uppercase;
+    color: var(--vermelho);
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 0.05em;
+}
+
+#icone_erro{
+    width: 16px;
+    height: auto;
+}
+
+</style>
+
+</html>
