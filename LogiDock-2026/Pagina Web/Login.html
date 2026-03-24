@@ -16,9 +16,9 @@
     <div class="container">
 
 
-        <div class="container_input" id="input_usuario">
-            <img src="icone_usuario.png" alt="">
-            <input type="text" id="ipt_usuario" placeholder="USUÁRIO">
+        <div class="container_input" id="input_email">
+            <img src="icone_email.png" alt="">
+            <input type="text" id="ipt_email" placeholder="EMAIL">
         </div>
 
         <div class="container_input" id="input_senha">
@@ -42,37 +42,6 @@
 </body>
 
 <script>
-
-function entrar() {
-    const usuario = ipt_usuario.value.trim();
-    const senha   = ipt_senha.value;
-
-    if (!usuario || !senha) {
-        alert('Preencha todos os campos.');
-
-    } else {
-
-        const listadeUsuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-
-        // Começa como false. Só vira true se encontrar usuário E senha corretos.
-        let loginCorreto = false;
-
-        for (let i = 0; i < listadeUsuarios.length; i++) {
-
-            // Para o login ser aceito, os DOIS precisam bater ao mesmo tempo.
-            if (listadeUsuarios[i].usuario === usuario && listadeUsuarios[i].senha === senha) {
-                loginCorreto = true;
-            }
-        }
-
-        if (loginCorreto) {
-            alert('Login realizado com sucesso!');
-        } else {
-            msg_erro.innerHTML = `Usuário ou senha incorretos.`
-            icone_erro.src = 'icone_erro.png'
-        }
-    }
-}
 
 </script>
 
